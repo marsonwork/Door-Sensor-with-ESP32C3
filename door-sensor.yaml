@@ -1,0 +1,40 @@
+esphome:
+  name: door-sensor
+  friendly_name: Door_Sensor
+
+esp32:
+  board: seeed_xiao_esp32c3
+  variant: esp32c3
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "ZXJYItUWOEll5pWb41ToiLickoSo4UfX7NBVw7MKuHw="
+
+ota:
+  password: "3816dbc7066d795b4aac9c7465d45268"
+
+wifi:
+  ssid: Potato
+  password: Qwertyuiop!@1729
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Door-Sensor Fallback Hotspot"
+    password: "dnKbTZUUHNwj"
+
+captive_portal:
+
+# Define your door sensor pin and setup
+binary_sensor:
+  - platform: gpio
+    name: "Main Door"
+    pin:
+      number: GPIO2
+      mode: INPUT_PULLUP
+    device_class: door
