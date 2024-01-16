@@ -1,3 +1,5 @@
+#This file is for esphome
+
 esphome:
   name: door-sensor
   friendly_name: Door_Sensor
