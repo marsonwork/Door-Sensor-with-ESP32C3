@@ -1,0 +1,26 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+input_number:
+  tank_water_percentage:
+    name: "Tank Water Percentage"
+    initial: 0
+    min: 0
+    max: 100
+    step: 1
+
+mqtt:
+  binary_sensor:
+    - name: "office door"
+      state_topic: "office/balcony/door"
+      payload_on: "OPEN"
+      payload_off: "CLOSED"
+      device_class: door
