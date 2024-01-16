@@ -1,0 +1,58 @@
+esphome:
+  name: door-sensor
+  friendly_name: Door_Sensor
+
+esp32:
+  board: seeed_xiao_esp32c3
+  variant: esp32c3
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "API KEY HERE"
+
+ota:
+  password: "OTA PASSKEY HERE"
+
+wifi:
+  ssid: SSID
+  password: PASSWORD
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Door-Sensor Fallback Hotspot"
+    password: "dnKbTZUUHNwj"
+
+mqtt:
+  broker: '192.168.29.159'
+  username: 'mqtt-user'
+  password: 'mqqt-user-password'
+
+captive_portal:
+
+# Define your door sensor pin and setup
+binary_sensor:
+  - platform: gpio
+    name: "Home Door"
+    pin:
+      number: GPIO3
+      mode: INPUT_PULLUP
+    device_class: door
+    on_press:
+      then:
+        - mqtt.publish:
+            topic: "home/door-sensor/home-door"
+            payload: "OPEN"
+    on_release:
+      then:
+        - mqtt.publish:
+            topic: "home/door-sensor/home-door"
+            payload: "CLOSED"
+
+
+    
