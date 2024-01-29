@@ -28,7 +28,7 @@ void setup() {
 void setup_wifi() {
   delay(10);
   Serial.println("Connecting to WiFi");
-  WiFi.begin("Potato", "Qwertyuiop!@1729");
+  WiFi.begin("WiFiSSID", "WiFiPassKey");
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
