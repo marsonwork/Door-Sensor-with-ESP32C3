@@ -7,7 +7,7 @@
 #define MQTT_PORT 1883                      // Enter your MQTT broker port
 #define MQTT_USER "mqtt-user"           // Enter your MQTT username
 #define MQTT_PASSWORD "o$Lmqtt!@1729"       // Enter your MQTT password
-#define MQTT_CLIENT_ID "office door"        // Unique client ID for the door sensor
+#define MQTT_CLIENT_ID "Home Door"        // Unique client ID for the door sensor
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -66,11 +66,11 @@ void loop() {
 
   if (lastDoorState == LOW && currentDoorState == HIGH) {
     Serial.println("The door-opening event is detected");
-    client.publish("office/balcony/door", "OPEN");  // Publish MQTT message for door open
+    client.publish("office/balcony/door", "OPEN", true);  // Publish MQTT message for door open, and retain the state
     // TODO: turn on alarm, light or send notification ...
   } else if (lastDoorState == HIGH && currentDoorState == LOW) {
     Serial.println("The door-closing event is detected");
-    client.publish("office/balcony/door", "CLOSED");  // Publish MQTT message for door closed
+    client.publish("office/balcony/door", "CLOSED", true);  // Publish MQTT message for door closed, and retain the state
     // TODO: turn off alarm, light or send notification ...
   }
 }
