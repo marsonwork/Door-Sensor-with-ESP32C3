@@ -19,7 +19,7 @@ input_number:
 
 mqtt:
   binary_sensor:
-    - name: "office door"
+    - name: "Home Door"
       state_topic: "office/balcony/door"
       payload_on: "OPEN"
       payload_off: "CLOSED"
